@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Alarm Clock</title>
+</head>
+<body>
+     <div class="container">
+        <h1>Alarm Clock</h1>
+
+        <img src="ASSETS/alarm-clock.png" alt="Alarm">
+
+        <div id="currentTime">00:00:00</div>
+
+        <label for="alarmTime">Pick Date & Time:</label><br>
+        <input type="datetime-local" id="alarmTime"> <br>
+
+        <label for="alarmLabel">Label:</label><br>
+        <input type="text" id="alarmLabel" placeholder="e.g.Wake up"><br>
+
+        <button onclick="setAlarm()">Add Alarm</button>
+
+        <button onclick="clearAllAlarms()">Clear All</button>
+
+        <h3>My Alarms:</h3>
+        <ul id="alarmList"></ul>
+
+        <audio id="alarmSound" src="ASSETS/alarm-beep-34359.mp3" preload="auto"></audio>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
