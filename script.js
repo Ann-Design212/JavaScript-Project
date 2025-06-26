@@ -2,6 +2,20 @@
 
 let alarms= [];
 
+// Load alarms from localStorage on page load
+function loadAlarmsFromStorage(){
+    const stored = localStorage.getItem("alarms");
+    if (stored){
+        alarms = JSON.parse(stored);
+        showAlarms();
+    }
+}
+
+// Save current alarms to localStorage
+function saveAlarmsToStorage() {
+    localStorage.setItem("alarms", JSON.stringify(alarms));
+}
+
 function updateTime() {
     let now = new Date(); // get current time
     let hours = now.getHours().toString().padStart(2, "0");
@@ -27,12 +41,14 @@ function updateTime() {
             playAlarm(alarms[i].label);
             alarms.splice(i, 1);
             showAlarms();
+            saveAlarmsToStorage();
             break;
         }
     }
 
 }
 setInterval(updateTime, 1000);
+loadAlarmsFromStorage();
 
 function setAlarm(){
     let time = document.getElementById('alarmTime').value;
@@ -55,6 +71,7 @@ function setAlarm(){
     alarms.push({time:time, label:label});
     alert("Alarm set!");
     showAlarms();
+    saveAlarmsToStorage();
 
     // Clear input boxes
     document.getElementById('alarmTime').value = "";
@@ -81,6 +98,7 @@ function showAlarms() {
 function deleteAlarm(index) {
     alarms.splice(index, 1);
     showAlarms();
+    saveAlarmsToStorage();
 }
 
 function clearAllAlarms() {
@@ -90,4 +108,5 @@ function clearAllAlarms() {
     document.getElementById('alarmSound').currentTime = 0;
     alert("All alarms cleared.")
     showAlarms();
+    saveAlarmsToStorage();
 }
